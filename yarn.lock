@@ -421,6 +421,11 @@ combined-stream@^1.0.8:
   dependencies:
     delayed-stream "~1.0.0"
 
+common-tags@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
+  integrity sha512-6P6g0uetGpW/sdyUy/iQQCbFF0kWVMSIVSyYz7Zgjcgh8mgw8PQzDNZeyZ5DQ2gM7LBoZPHmnjz8rUthkBG5tw==
+
 compressible@^2.0.12:
   version "2.0.18"
   resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.18.tgz#af53cca6b070d4c3c0750fbd77286a6d7cc46fba"
@@ -498,6 +503,13 @@ diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+
+discord.js-commando@discordjs/Commando:
+  version "0.11.0-dev"
+  resolved "https://codeload.github.com/discordjs/Commando/tar.gz/198d7604e3725ee88dceab9b5f296edb1b7580a5"
+  dependencies:
+    common-tags "^1.8.0"
+    require-all "^3.0.0"
 
 discord.js@^12.4.1:
   version "12.4.1"
@@ -1364,6 +1376,11 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
+require-all@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/require-all/-/require-all-3.0.0.tgz#473d49704be310115ce124f77383b1ebd8671312"
+  integrity sha1-Rz1JcEvjEBFc4ST3c4Ox69hnExI=
+
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
@@ -1469,6 +1486,11 @@ spdx-license-ids@^3.0.0:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz#c80757383c28abf7296744998cbc106ae8b854ce"
   integrity sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
+
+sqlite@^4.0.15:
+  version "4.0.15"
+  resolved "https://registry.yarnpkg.com/sqlite/-/sqlite-4.0.15.tgz#071e0577afb327fbd74a75354ea15964378392e3"
+  integrity sha512-irPPTrbVoDvwzRGpe0v8vxpNwMl+q0tXQzffQTcCUnaJzQFO0hfLLvFwGDKxd6vYBuvEr3uvPkObVoGOvVsmzA==
 
 stream-events@^1.0.1, stream-events@^1.0.4, stream-events@^1.0.5:
   version "1.0.5"

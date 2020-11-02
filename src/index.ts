@@ -13,28 +13,47 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
-// Discord
-import Discord from 'discord.js';
-const client = new Discord.Client();
+// Discord + Commando
+import { CommandoClient } from 'discord.js-commando';
+const client = new CommandoClient({
+    commandPrefix: '!',
+    commandEditableDuration: 0
+});
 
-// Handlers
-import RootMessageHandler from './commands/index';
-import PingCommandHandler from './commands/ping';
-import configCommandHandler from './commands/config';
-const messageHandler = new RootMessageHandler();
-messageHandler.registerCommandHandler(new PingCommandHandler());
-messageHandler.registerCommandHandler(configCommandHandler);
-messageHandler.connect(client, db);
+// Command registry
+import path from 'path';
+client.registry
+    .registerGroups([
+        ['math', 'Math commands']
+    ])
+    .registerDefaults()
+    // .registerTypesIn(path.join(__dirname, 'types'))
+    .registerCommandsIn(path.join(__dirname, 'commands'));
+
+// Settings Provider
+const FirestoreProvider = require('./providers/firestore.js');
+client.setProvider(
+    new FirestoreProvider(db)
+).catch(console.error);
+
+// Handler
+// import RootMessageHandler from './commands/index';
+// import PingCommandHandler from './commands/ping';
+// import configCommandHandler from './commands/config';
+// const messageHandler = new RootMessageHandler();
+// messageHandler.registerCommandHandler(new PingCommandHandler());
+// messageHandler.registerCommandHandler(configCommandHandler);
+// messageHandler.connect(client, db);
 
 // Login handler
 client.on('ready', () => {
     console.log(`Logged in as ${client?.user?.tag}`)
 });
 
-// Message handler
-client.on('message', (msg: Message) => {
-    messageHandler.handleMessage(msg);
-});
+// // Message handler
+// client.on('message', (msg: Message) => {
+//     messageHandler.handleMessage(msg);
+// });
 
 // Login
 client.login(process.env.DISCORD_BOT_TOKEN).then(res => {
