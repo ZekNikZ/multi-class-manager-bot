@@ -17,6 +17,7 @@ const db = admin.firestore();
 import { CommandoClient } from 'discord.js-commando';
 const client = new CommandoClient({
     commandPrefix: '!',
+    owner: '133105799818903552',
     commandEditableDuration: 0
 });
 
@@ -24,7 +25,8 @@ const client = new CommandoClient({
 import path from 'path';
 client.registry
     .registerGroups([
-        ['math', 'Math commands']
+        ['math', 'Math commands'],
+        ['config', 'Configuration commands']
     ])
     .registerDefaults()
     // .registerTypesIn(path.join(__dirname, 'types'))
