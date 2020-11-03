@@ -1,20 +1,13 @@
-// Miscellaneous imports
-import { Message } from 'discord.js';
+import { CommandoClient } from 'discord.js-commando';
+import path from 'path';
 
-// Configuration
-require('dotenv').config();
 import config from './util/config';
+import db from './util/db';
 
-// Database
-import admin from 'firebase-admin';
-const serviceAccount = require('../firebase-key.json');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-const db = admin.firestore();
+// .env preloader
+require('dotenv').config();
 
 // Discord + Commando
-import { CommandoClient } from 'discord.js-commando';
 const client = new CommandoClient({
     commandPrefix: '!',
     owner: '133105799818903552',
@@ -22,7 +15,6 @@ const client = new CommandoClient({
 });
 
 // Command registry
-import path from 'path';
 client.registry
     .registerGroups([
         ['math', 'Math commands'],
@@ -38,24 +30,10 @@ client.setProvider(
     new FirestoreProvider(db)
 ).catch(console.error);
 
-// Handler
-// import RootMessageHandler from './commands/index';
-// import PingCommandHandler from './commands/ping';
-// import configCommandHandler from './commands/config';
-// const messageHandler = new RootMessageHandler();
-// messageHandler.registerCommandHandler(new PingCommandHandler());
-// messageHandler.registerCommandHandler(configCommandHandler);
-// messageHandler.connect(client, db);
-
 // Login handler
 client.on('ready', () => {
     console.log(`Logged in as ${client?.user?.tag}`)
 });
-
-// // Message handler
-// client.on('message', (msg: Message) => {
-//     messageHandler.handleMessage(msg);
-// });
 
 // Login
 client.login(process.env.DISCORD_BOT_TOKEN).then(res => {
