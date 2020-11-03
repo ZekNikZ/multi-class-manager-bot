@@ -1,8 +1,9 @@
+import { access } from "fs";
+
 export interface ConfigKey {
     key: string;
     type: string;
     defaultValue: string | boolean | number;
-    currentValue?: string | boolean | number | undefined;
     description: string;
 }
 
@@ -12,18 +13,22 @@ export interface ConfigObj {
 }
 
 export class Config {
-    config: ConfigObj;
+    private config: ConfigObj;
 
     constructor(configObj: ConfigObj) {
         this.config = configObj;
     }
 
-    getVersion(): string {
+    get version(): string {
         return this.config.version;
     }
 
-    getKeys(): string[] {
+    get keys(): string[] {
         return this.config.configKeys.map(k => k.key);
+    }
+
+    get default() {
+        return this.config.configKeys.reduce((acc, { key, defaultValue }) => ({ ...acc, [key]: defaultValue }), {});
     }
 
     getDescription(key: string) : string | undefined {
@@ -47,36 +52,11 @@ export class Config {
     getConfigKey(key: string) : ConfigKey | undefined {
         return this.config.configKeys.find(k => k.key === key);
     }
-
-    getValue(key: string) {
-        const ck = this.config.configKeys.find(k => k.key === key);
-
-        if (ck === undefined) {
-            throw new Error('Config key does not exist');
-        }
-
-        return ck.currentValue || ck.defaultValue;
-    }
-
-    setValue(key: string, value: string | boolean | number | undefined) {
-        const index = this.config.configKeys.findIndex(k => k.key === key);
-        if (index !== -1) {
-            this.config.configKeys[index].currentValue = value;
-        } else {
-            throw new Error('Config key does not exist');
-        }
-    }
 }
 
 export default new Config({
-    version: '1.0',
+    version: '0.2',
     configKeys: [
-        {
-            key: 'prefix',
-            type: 'string',
-            defaultValue: '!',
-            description: 'the command prefix on the server'
-        },
         {
             key: 'nickname',
             type: 'string',

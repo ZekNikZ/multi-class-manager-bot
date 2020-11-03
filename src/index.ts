@@ -44,11 +44,7 @@ client.login(process.env.DISCORD_BOT_TOKEN).then(res => {
             const guildConfig = await guildConfigRef.get();
 
             if (!guildConfig.exists) {
-                let defaultConfig = {} as any;
-                config.config.configKeys.forEach(({ key, ...obj }) => {
-                    defaultConfig[key] = obj.defaultValue;
-                });
-                await guildConfigRef.set(defaultConfig);
+                await guildConfigRef.set(config.default);
             }
 
             guild.member(client.user)?.setNickname((guildConfig.data() || {})['nickname'] || config.getDefaultValue('nickname'))

@@ -26,7 +26,7 @@ export default class ConfigCommand extends Command {
                     label: 'key',
                     prompt: 'What configuration key would you like to change?',
                     type: 'string',
-                    oneOf: config.getKeys(),
+                    oneOf: config.keys,
                     default: ''
                 },
                 {
@@ -42,6 +42,9 @@ export default class ConfigCommand extends Command {
 	}
 
 	async run(msg: CommandoMessage, args: { key: string, value: string }) {
+        if (!args.key) {
+            msg.reply(`Config keys: ${config.keys}`)
+        }
 		return msg.reply(`Config: ${args.key} ${args.value}`);
 	}
 };
